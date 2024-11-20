@@ -1,10 +1,11 @@
 from dataclasses import dataclass
+from typing import Optional
 import uuid
 
 
 @dataclass
 class Average:
-    id: int
+    id: Optional[int]
     student_id: uuid.UUID
     value: float
 

@@ -9,7 +9,7 @@ from grades.domain.enitites.average import Average
 def test_success_create_average_with_integer_values_between_0_and_10(value):
     student_id = uuid4()
 
-    avg = Average(student_id, value)
+    avg = Average(None, student_id, value)
 
     assert avg.student_id == student_id
     assert avg.value == value
@@ -19,7 +19,7 @@ def test_success_create_average_with_integer_values_between_0_and_10(value):
 def test_success_create_average_with_float_values_between_0_and_10(value):
     student_id = uuid4()
 
-    avg = Average(student_id, value)
+    avg = Average(None, student_id, value)
 
     assert avg.student_id == student_id
     assert avg.value == value
@@ -30,7 +30,7 @@ def test_fail_create_average_with_value_greater_then_10():
     value = 10.1
 
     with pytest.raises(ValueError):
-        Average(student_id, value)
+        Average(None, student_id, value)
 
 
 def test_fail_create_average_with_value_lower_then_0():
@@ -38,4 +38,4 @@ def test_fail_create_average_with_value_lower_then_0():
     value = -0.1
 
     with pytest.raises(ValueError):
-        Average(student_id, value)
+        Average(None, student_id, value)
