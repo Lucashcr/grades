@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import List
 import uuid
 
 import psycopg
@@ -9,12 +10,12 @@ from grades.domain.enitites.grade import Grade
 
 class GradeRepository(ABC):
     @abstractmethod
-    def list(self, limit: int = 20, offset: int = 0): ...
+    def list(self, limit: int = 20, offset: int = 0) -> List[Grade]: ...
 
     @abstractmethod
     def list_by_student(
         self, student_id: uuid.UUID, limit: int = 20, offset: int = 0
-    ): ...
+    ) -> List[Grade]: ...
 
     @abstractmethod
     def save(self, grade: Grade): ...
@@ -33,7 +34,6 @@ class GradeRepositoryDatabase(GradeRepository):
         with self.connection.cursor(row_factory=psycopg.rows.dict_row) as cursor:
             cursor.execute("select * from grades limit %s offset %s", [limit, offset])
             result = cursor.fetchall()
-            print(result)
 
         return [Grade(**row) for row in result]
 
@@ -48,4 +48,7 @@ class GradeRepositoryDatabase(GradeRepository):
         return [Grade(**row) for row in result]
 
     def save(self, grade):
-        return super().save(grade)
+        if grade.id:
+            query = ""
+        with self.connection.cursor(row_factory=psycopg.rows.dict_row) as cursor:
+            cursor.execute("")
