@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "psycopg[binary,pool]>=3.2.3",
+    "python-dotenv>=1.0.1",
 ]
 
 [dependency-groups]
@@ -17,4 +18,7 @@ dev = [
 pythonpath = "."
 testpaths = [
     "tests",
+]
+markers = [
+    "database",
 ]
