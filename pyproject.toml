@@ -7,17 +7,19 @@ requires-python = ">=3.13"
 dependencies = [
     "psycopg[binary,pool]>=3.2.3",
     "python-dotenv>=1.0.1",
+    "fastapi (>=0.115.12,<0.116.0)",
+    "uvicorn (>=0.34.3,<0.35.0)",
 ]
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.0"
 
 
+[tool.poetry.scripts]
+dev = "grades.scripts:run_dev"
+
+
 [tool.pytest.ini_options]
 pythonpath = "."
-testpaths = [
-    "tests",
-]
-markers = [
-    "database",
-]
+testpaths = ["tests"]
+markers = ["database"]
